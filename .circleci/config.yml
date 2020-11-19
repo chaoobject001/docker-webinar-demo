@@ -18,6 +18,7 @@ jobs:
   build_docker_image:
     docker:
       - image: cimg/node:14.0.0
+    parallelism: 10
     steps:
       - checkout
       - setup_remote_docker:
