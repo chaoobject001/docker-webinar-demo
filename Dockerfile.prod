@@ -1,10 +1,12 @@
 FROM node:14.0.0 as build
 
-LABEL author="Ryan Pedersen"
+LABEL author="Charles Kuo"
 
-WORKDIR /demo-app
+WORKDIR /app
 
 COPY package*.json ./
+
+RUN npm install -g npm
 
 RUN npm install
 
@@ -14,7 +16,7 @@ RUN npm run build
 
 FROM nginx:stable-alpine
 
-COPY --from=build /demo-app/build /usr/share/nginx/html
+COPY --from=build /app/build /usr/share/nginx/html
 
 EXPOSE 80
 
